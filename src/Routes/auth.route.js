@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 // register
 authrouter.post('/register',async(req,res)=>{
 
-    const {username,email,password}=req.body;
+    const {username,email,password,interest}=req.body;
     try{
 
         const user = await User.findOne({email: email });
@@ -20,7 +20,8 @@ authrouter.post('/register',async(req,res)=>{
                 const newUser=new User({
                     username:username,
                     email:email,
-                    password:hashPass
+                    password:hashPass,
+                    interest:interest
                 })
 
                 const user = await newUser.save();

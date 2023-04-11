@@ -20,6 +20,10 @@ const UserSchema = new mongoose.Schema({
         type:String,
         default:"",
     },
+    interest: {
+        type: [String], 
+        default: []
+    }
 
 },{timestamps:true});
 

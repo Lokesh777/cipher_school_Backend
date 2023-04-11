@@ -17,7 +17,7 @@ userRouter.put("/:id", async (req, res) => {
         },
         { new: true }
       );
-      res.status(200).json(updatedUser);
+      res.status(200).json({message: `${req.body.username} details updated successfully...`,updatedUser});
     } catch (err) {
       res.status(500).json({
         err,
@@ -29,27 +29,33 @@ userRouter.put("/:id", async (req, res) => {
   }
 });
 
-//DELETE
-userRouter.delete("/:id", async (req, res) => {
-  if (req.body.userId === req.params.id) {
-    try {
-      const user = await User.findById(req.params.id);
-      try {
-        await User.findByIdAndDelete(req.params.id);
-        res.status(200).json("User has been deleted...");
-      } catch (err) {
-        res.status(500).json({
-          err,
-          message:"user not exist!"
-        });
-      }
-    } catch (err) {
-      res.status(404).json("User not found!");
+
+//delete
+userRouter.delete('/:id', async function (req, res) {
+  const userId = req.params.id;
+  
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        message: "user Profile does not exist!"
+      });
     }
-  } else {
-    res.status(401).json("You can delete only your account!");
+    
+    await user.deleteOne();
+    res.status(200).json({
+      message: "user Profile has been deleted successfully..."
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Network error !",
+      err
+    });
   }
 });
+
 
 //GET USER
 userRouter.get("/:id", async (req, res) => {
