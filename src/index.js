@@ -24,7 +24,7 @@ app.use("/api/auth",authrouter)
 app.use("/api/user",userRouter)
 
 app.use("/",(req,res)=>{
-   res.status(201).json({message: 'Welcome to The Blogify'});
+   res.status(201).json({message: 'Welcome to The CipherSchool'});
     res.send();
 })
 
