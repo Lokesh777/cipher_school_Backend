@@ -9,7 +9,6 @@ const userRouter = require('./Routes/user.route');
 const authrouter = require('./Routes/auth.route');
 
 app.use(express.json());
-
 app.use(cors());
 
 app.use((req, res, next) => {
@@ -25,7 +24,7 @@ app.use("/api/auth",authrouter)
 app.use("/api/user",userRouter)
 
 app.use("/",(req,res)=>{
-   res.status(201).json({message: 'Welcome to The Cipher School'});
+   res.status(201).json({message: 'Welcome to The Blogify'});
     res.send();
 })
 
